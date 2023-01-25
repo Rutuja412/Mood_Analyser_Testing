@@ -14,10 +14,17 @@ namespace MoodAnalyser_Practice
         
         public string AnalyserMood()
         {
-            if (message.Contains("Sad"))
-                return "SAD";
-            else
+            try
+            {
+                if (message.Contains("Sad"))
+                    return "SAD";
+                else
+                    return "HAPPY";
+            }
+            catch
+            {
                 return "HAPPY";
+            }
         }
     }
 }
