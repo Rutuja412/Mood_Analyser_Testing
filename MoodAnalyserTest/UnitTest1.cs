@@ -44,5 +44,35 @@ namespace MoodAnalyserTest
             //Assert
             Assert.AreEqual(expected,actual);
         }
+        [TestMethod]//TC3.1 //CustomException//null
+        public void GivenNullMood_Analyzer_Should_Throw_CustomException()
+        {
+            try
+            {
+                string message = null;
+                MoodAnalyzer analyser = new MoodAnalyzer(message);
+                string actual = analyser.AnalyserMood();
+            }
+            catch (CustomException e)
+            {
+                Assert.AreEqual("Mood should not be Null", e.Message);
+            }
+
+        }
+        [TestMethod]//TC3.2//
+        public void GivenEmptyMood_WhenAnalyzer_ShouldThrowCustomException()
+        {
+            try
+            {
+                string message = " ";
+                MoodAnalyzer analyser = new MoodAnalyzer(message);
+                string actual = analyser.AnalyserMood();
+            }
+            catch (CustomException e)
+            {
+                Assert.AreEqual("Mood should not be Empty", e.Message);
+            }
+        }
     }
 }
+

@@ -15,15 +15,23 @@ namespace MoodAnalyser_Practice
         public string AnalyserMood()
         {
             try
-            {
-                if (message.Contains("Sad"))
+            { 
+                if(this.message.Equals(string.Empty))
+                {
+                    throw new CustomException(CustomException.ExceptionType.EMPTY_MESSAGE, "Mood should not be empty");
+                }
+                if (this.message.Contains("Sad"))
+                {
                     return "SAD";
+                }
                 else
+                {
                     return "HAPPY";
+                }
             }
-            catch
+            catch(NullReferenceException)
             {
-                return "HAPPY";
+                throw new CustomException(CustomException.ExceptionType.NULL_MESSAGE, "Mood Should not be Null");
             }
         }
     }
