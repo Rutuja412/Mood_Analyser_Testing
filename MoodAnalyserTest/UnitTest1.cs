@@ -14,20 +14,21 @@ namespace MoodAnalyserTest
             string expected = "SAD";
             string message = "I am in Sad Mood";
             //Act
-            MoodAnalyzer analyser = new MoodAnalyzer();
-            string actual = analyser.AnalyserMood(message);
+            MoodAnalyzer analyser = new MoodAnalyzer(message);
+            string actual = analyser.AnalyserMood();
             //Assert
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
+        //TC1.2 Given “I am in Any Mood” message Should Return Happy
         public void GivenAnyMessage_Analyzer_ShouldReturnHappyMood()
         {
             //Arrange
             string expected = "HAPPY";
             string message = "I am in Any Mood";
             //Act
-            MoodAnalyzer analyser = new MoodAnalyzer();
-            string actual = analyser.AnalyserMood(message);
+            MoodAnalyzer analyser = new MoodAnalyzer(message);
+            string actual = analyser.AnalyserMood();
             //Assert
             Assert.AreEqual(expected, actual);
         }
