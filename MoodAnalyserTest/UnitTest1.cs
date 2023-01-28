@@ -20,6 +20,7 @@ namespace MoodAnalyserTest
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
+
         //TC1.2 Given “I am in Any Mood” message Should Return Happy
         public void GivenAnyMessage_Analyzer_ShouldReturnHappyMood()
         {
@@ -37,12 +38,12 @@ namespace MoodAnalyserTest
         {
             //Arrange
             string expected = "HAPPY";
-           string message = null;
-           MoodAnalyzer analyser = new MoodAnalyzer(message);
+            string message = null;
+            MoodAnalyzer analyser = new MoodAnalyzer(message);
             //Act
             string actual = analyser.AnalyserMood();
             //Assert
-            Assert.AreEqual(expected,actual);
+            Assert.AreEqual(expected, actual);
         }
         [TestMethod]//TC3.1 //CustomException//null
         public void GivenNullMood_Analyzer_Should_Throw_CustomException()
@@ -73,6 +74,32 @@ namespace MoodAnalyserTest
                 Assert.AreEqual("Mood should not be Empty", e.Message);
             }
         }
-    }
-}
+        [TestMethod]//TC4.1// MoodAnalyserObject
+        public void GivenClassName_ShouldReturnMoodAnalyserObject()
+        {
+            string message = null;
+            object expected = new MoodAnalyzer(message);
+            //object expected1 = expected;
+            object obj = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyzer_Practice.MoodAnalyzer", "MoodAnalyzer");
+           expected.Equals(obj);
+           // Assert.AreEqual(expected1, obj);
+           
+        }
+        [TestMethod]//4.2
+        public void GivenClassNameWhenImproper_ShouldThrowMoodAnalyserExpection()
+        {
+            string excepted = "Class Not Found";
+            try
+            {
+                object obj = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyzer_Practice.MoodAnalyzer", "MoodAnalyzer");
+            }
+            catch (CustomException e)
+            {
+                Assert.AreEqual(excepted, e.Message);
+            }
+        }
 
+
+    }
+
+}

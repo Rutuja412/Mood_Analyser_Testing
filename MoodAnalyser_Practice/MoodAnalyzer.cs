@@ -6,6 +6,11 @@ namespace MoodAnalyser_Practice
 {
     public class MoodAnalyzer
     {
+        public MoodAnalyzer()//default ctor
+        {
+
+        }
+
         private string message;
         public MoodAnalyzer(string message)
         {
