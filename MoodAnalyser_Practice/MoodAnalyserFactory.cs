@@ -21,7 +21,6 @@ namespace MoodAnalyser_Practice
             {
                 try
                 {
-
                     Assembly executing = Assembly.GetExecutingAssembly();
                     Type moodAnalyseType = executing.GetType(className);
                     return Activator.CreateInstance(moodAnalyseType);//create object
@@ -31,8 +30,6 @@ namespace MoodAnalyser_Practice
                     throw new CustomException(CustomException.ExceptionType.NO_SUCH_CLASS, "Class not found");
 
                 }
-
-
             }
             else
             {
@@ -61,7 +58,23 @@ namespace MoodAnalyser_Practice
 
             }
         }
+        public static string InvokedAnalyseMood(string message, string methodName)//UC6
+        {
+            try
+            {
+                Type type = Type.GetType("MoodAnalyser_Practice.MoodAnalyser");
+                object moodAnalyseObject = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyser_Practice.MoodAnalyzer", "MoodAnalyzer", "HAPPY");
+                MethodInfo analyseMoodInfo = type.GetMethod(methodName);
+                object mood = analyseMoodInfo.Invoke(moodAnalyseObject, null);
+                return mood.ToString();
+            }
+            catch (NullReferenceException)
+            {
+                CustomException exp = new CustomException(CustomException.ExceptionType.NO_SUCH_FIELD, "No Such Field error");
+                return exp.Message;
+            }
+        }
+
+
     }
-
-
 }
