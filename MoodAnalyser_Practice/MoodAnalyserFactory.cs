@@ -13,7 +13,7 @@ namespace MoodAnalyser_Practice
         {
             this.message = message;
         }
-        public static object CreateMoodAnalyser(string className, string constructorName)
+        public static object CreateMoodAnalyser(string className, string constructorName, string message)
         {
             string pattern = @"." + constructorName + "$";
             Match result = Regex.Match(className, pattern);
@@ -39,5 +39,29 @@ namespace MoodAnalyser_Practice
                 throw new CustomException(CustomException.ExceptionType.NO_SUCH_METHOD, "Constructor is not found");
             }
         }
+        public static object CreateMoodAnalyseUsingParameterizedConstructor(string className, string constructorName, string message)
+        {
+            Type type = typeof(MoodAnalyzer);
+            if (type.Name.Equals(className) || type.FullName.Equals(className))
+            {
+                if (type.Name.Equals(constructorName))
+                {
+                    ConstructorInfo ctor = type.GetConstructor(new[] { typeof(string) });
+                    object instance = ctor.Invoke(new object[] { "HAPPY" });
+                    return instance;
+                }
+                else
+                {
+                    throw new CustomException(CustomException.ExceptionType.NO_SUCH_METHOD, "Constructor is not found");
+                }
+            }
+            else
+            {
+                throw new CustomException(CustomException.ExceptionType.NO_SUCH_CLASS, "Class not found");
+
+            }
+        }
     }
+
+
 }

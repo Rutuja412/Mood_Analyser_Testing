@@ -21,4 +21,5 @@ namespace MoodAnalyser_Practice
             this.type = Type;
         }
     }
+
 }

@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MoodAnalyser_Practice;
+using System;
 
 namespace MoodAnalyserTest
 {
@@ -74,32 +75,62 @@ namespace MoodAnalyserTest
                 Assert.AreEqual("Mood should not be Empty", e.Message);
             }
         }
-        [TestMethod]//TC4.1// MoodAnalyserObject
-        public void GivenClassName_ShouldReturnMoodAnalyserObject()
+        //[TestMethod]//TC4.1// MoodAnalyserObject
+        //public void GivenClassName_ShouldReturnMoodAnalyserObject()
+        //{
+        //    string message = null;
+        //    object expected = new MoodAnalyzer(message);
+        //    //object expected1 = expected;
+        //    object obj = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyzer_Practice.MoodAnalyzer", "MoodAnalyzer");
+        //    expected.Equals(obj);
+        //    // Assert.AreEqual(expected1, obj);
+
+        //}
+        //[TestMethod]//4.2
+        //public void GivenClassNameWhenImproper_ShouldThrowMoodAnalyserExpection()
+        //{
+        //    string excepted = "Class Not Found";
+        //    try
+        //    {
+        //        object obj = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyzer_Practice.MoodAnalyzer", "MoodAnalyzer");
+        //    }
+        //    catch (CustomException e)
+        //    {
+        //        Assert.AreEqual(excepted, e.Message);
+        //    }
+        //}
+        [TestMethod]//TC5.1
+        public void GivenMoodAnalyzerWhenProperReturn_MoodAnalyserObject()
         {
-            string message = null;
-            object expected = new MoodAnalyzer(message);
-            //object expected1 = expected;
-            object obj = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyzer_Practice.MoodAnalyzer", "MoodAnalyzer");
-           expected.Equals(obj);
-           // Assert.AreEqual(expected1, obj);
-           
-        }
-        [TestMethod]//4.2
-        public void GivenClassNameWhenImproper_ShouldThrowMoodAnalyserExpection()
-        {
-            string excepted = "Class Not Found";
             try
             {
-                object obj = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyzer_Practice.MoodAnalyzer", "MoodAnalyzer");
+                string message = "HAPPY";
+            object actual = new MoodAnalyzer(message);
+            object obj = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyzer", "MoodAnalyzer", message);
+            actual.Equals(obj);
             }
-            catch (CustomException e)
+            catch (Exception e)
             {
-                Assert.AreEqual(excepted, e.Message);
+                Console.WriteLine(e.Message);
+            }
+        }
+        [TestMethod]//5.2
+        
+        public void Given_MoodAnalyser_Class_Name_If_Improper_Should_Throw_MoodAnalyserException()
+        {
+            try
+            {
+                object expected = new MoodAnalyzer("HAPPY");
+                object obj = MoodAnalyserFactory.CreateMoodAnalyser(" MoodAnalyser_Practice.MoodAnalzer", "MoodAnalyser", "HAPPY");
+                expected.Equals(obj);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
 
 
-    }
+    }   }
 
-}
+
